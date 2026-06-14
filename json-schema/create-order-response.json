@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payflex/main/json-schema/create-order-response.json",
+  "title": "Create Order Response",
+  "description": "Response returned by POST /order/productSelect when a Payflex order is created successfully",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Payflex-issued unique order identifier",
+      "example": "ord_abc123xyz"
+    },
+    "token": {
+      "type": "string",
+      "description": "Order token used for status tracking",
+      "example": "tok_xyz789abc"
+    },
+    "redirectUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to redirect the consumer to complete the Payflex hosted checkout",
+      "example": "https://checkout.payflex.co.za/order/ord_abc123xyz"
+    },
+    "message": {
+      "type": "string",
+      "description": "Error or informational message; empty on success",
+      "example": ""
+    }
+  }
+}

@@ -1,0 +1,145 @@
+title: Payflex API Vocabulary
+description: Domain terms and definitions used in the Payflex Merchant API
+terms:
+
+  - term: BNPL
+    definition: >
+      Buy Now Pay Later. A payment model that allows consumers to purchase goods
+      immediately and pay for them in installments over time, often interest-free.
+    related:
+      - installment
+      - deferred payment
+
+  - term: orderId
+    definition: >
+      A unique identifier assigned by Payflex when an order is created via
+      POST /order/productSelect. Used to track order status and initiate refunds.
+    type: string
+    example: ord_abc123xyz
+
+  - term: token
+    definition: >
+      A short-lived order token returned with the orderId on order creation.
+      Used alongside the orderId for order tracking and verification.
+    type: string
+
+  - term: redirectUrl
+    definition: >
+      The URL returned by Payflex after order creation. Merchants must redirect
+      the consumer to this URL to complete the Payflex hosted checkout experience.
+    type: string (URI)
+
+  - term: orderStatus
+    definition: >
+      The current lifecycle state of a Payflex order. Possible values are
+      Created, Initiated, Approved, Declined, Abandoned, and Cancelled.
+    values:
+      - value: Created
+        description: Order created on Payflex; consumer has not yet started the checkout.
+      - value: Initiated
+        description: Consumer has opened the Payflex checkout and started the approval process.
+      - value: Approved
+        description: Payment approved; Payflex will settle funds to the merchant.
+      - value: Declined
+        description: Payment declined; a new order may be created.
+      - value: Abandoned
+        description: Consumer did not complete the Payflex checkout within the allowed time.
+      - value: Cancelled
+        description: Order was explicitly cancelled.
+
+  - term: merchantReference
+    definition: >
+      The merchant's own internal order or invoice number, submitted at order
+      creation and stored by Payflex for reconciliation purposes.
+    type: string
+
+  - term: requestId
+    definition: >
+      A unique identifier the merchant supplies for each refund request. Must be
+      unique per refund attempt to prevent duplicate refund processing.
+    type: string
+
+  - term: minimumAmount
+    definition: >
+      The minimum order total (in ZAR) that is eligible for Payflex BNPL
+      installment payments, as configured for the merchant account.
+    type: number
+
+  - term: maximumAmount
+    definition: >
+      The maximum order total (in ZAR) eligible for Payflex BNPL installment
+      payments, as configured for the merchant account.
+    type: number
+
+  - term: consumer
+    definition: >
+      The end-customer making a purchase via Payflex. Consumer details include
+      phone number, given names, surname, and email address.
+
+  - term: suburb
+    definition: >
+      Used in South African address fields in place of "city". Refers to the
+      residential or commercial suburb within a city or metropolitan area.
+    type: string
+
+  - term: client_credentials
+    definition: >
+      The OAuth2 grant type used by Payflex for machine-to-machine
+      authentication. Merchants exchange a client_id and client_secret for a
+      Bearer access token at the /auth/merchant endpoint.
+
+  - term: access_token
+    definition: >
+      A Bearer JWT token returned by the Payflex authentication endpoint.
+      Must be included in the Authorization header of all API requests.
+      Tokens expire (typically 3600 seconds) and should be cached and
+      refreshed automatically.
+
+  - term: audience
+    definition: >
+      An OAuth2 parameter identifying the intended recipient of the token.
+      Production: https://auth-production.payflex.co.za.
+      Sandbox: https://auth-dev.payflex.co.za.
+
+  - term: isPlugin
+    definition: >
+      A boolean flag sent in refund requests to indicate the refund was
+      initiated from an official Payflex e-commerce plugin integration
+      (e.g., WooCommerce, Magento, OpenCart).
+    type: boolean
+
+  - term: taxAmount
+    definition: >
+      The portion of the order total that represents tax (e.g., VAT).
+      Included in the order creation request for merchant reporting.
+    type: number
+
+  - term: shippingAmount
+    definition: >
+      The portion of the order total that represents shipping costs.
+      Included in the order creation request for merchant reporting.
+    type: number
+
+  - term: merchantSystemInformation
+    definition: >
+      Metadata about the merchant's e-commerce platform and integration plugin,
+      submitted with order creation requests. Used by Payflex for diagnostics
+      and support, not required for payment processing.
+
+  - term: redirectConfirmUrl
+    definition: >
+      The URL Payflex redirects the consumer to after a successful payment.
+      Should lead to the merchant's order confirmation or thank-you page.
+
+  - term: redirectCancelUrl
+    definition: >
+      The URL Payflex redirects the consumer to after a cancelled or
+      abandoned payment. Should lead to the merchant's checkout or cart page.
+
+  - term: errorCode
+    definition: >
+      A machine-readable code returned in error responses. Example: MRM007
+      indicates a refund business rule violation such as exceeding the
+      refundable balance.
+    type: string
+    example: MRM007

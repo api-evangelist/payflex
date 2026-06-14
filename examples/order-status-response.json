@@ -1,0 +1,12 @@
+{
+  "orderId": "ord_abc123xyz",
+  "orderStatus": "Approved",
+  "merchantReference": "12345",
+  "amount": 299.99,
+  "consumer": {
+    "phoneNumber": "+27821234567",
+    "givenNames": "Jane",
+    "surname": "Smith",
+    "email": "jane.smith@example.com"
+  }
+}

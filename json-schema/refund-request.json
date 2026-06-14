@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payflex/main/json-schema/refund-request.json",
+  "title": "Refund Request",
+  "description": "Request body for initiating a full or partial refund via POST /order/{orderId}/refund",
+  "type": "object",
+  "required": ["requestId", "amount"],
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "Unique identifier for this refund request; must be unique per attempt to prevent duplicate refunds",
+      "example": "Order #12345-ab3cd4ef"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount to refund. May be less than the original order total for partial refunds.",
+      "minimum": 0.01,
+      "example": 99.99
+    },
+    "isPlugin": {
+      "type": "boolean",
+      "description": "Flag indicating the refund was initiated from a plugin integration",
+      "example": true
+    },
+    "merchantRefundReference": {
+      "type": "string",
+      "description": "Merchant's own reference for this refund",
+      "example": "Order #12345-ab3cd4ef"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payflex/main/json-schema/create-order-request.json",
+  "title": "Create Order Request",
+  "description": "Request body for creating a new Payflex BNPL installment payment order via POST /order/productSelect",
+  "type": "object",
+  "required": ["amount", "consumer", "merchant", "merchantReference"],
+  "properties": {
+    "amount": {
+      "type": "string",
+      "description": "Total order amount formatted to two decimal places",
+      "pattern": "^\\d+\\.\\d{2}$",
+      "example": "299.99"
+    },
+    "consumer": {
+      "type": "object",
+      "description": "Consumer contact information",
+      "required": ["phoneNumber", "givenNames", "surname", "email"],
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Consumer's phone number including country code",
+          "example": "+27821234567"
+        },
+        "givenNames": {
+          "type": "string",
+          "description": "Consumer's first name(s)",
+          "example": "Jane"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Consumer's last name",
+          "example": "Smith"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Consumer's email address",
+          "example": "jane.smith@example.com"
+        }
+      }
+    },
+    "billing": {
+      "type": "object",
+      "description": "Billing address",
+      "properties": {
+        "addressLine1": { "type": "string", "example": "12 Main Street" },
+        "addressLine2": { "type": "string", "example": "Apt 3" },
+        "suburb": { "type": "string", "example": "Cape Town" },
+        "postcode": { "type": "string", "example": "8001" }
+      }
+    },
+    "shipping": {
+      "type": "object",
+      "description": "Shipping address",
+      "properties": {
+        "addressLine1": { "type": "string", "example": "12 Main Street" },
+        "addressLine2": { "type": "string", "example": "Apt 3" },
+        "suburb": { "type": "string", "example": "Cape Town" },
+        "postcode": { "type": "string", "example": "8001" }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable order description",
+      "example": "Order from Example Store"
+    },
+    "items": {
+      "type": "array",
+      "description": "Line items in the order",
+      "items": {
+        "type": "object",
+        "required": ["name", "quantity", "price"],
+        "properties": {
+          "name": { "type": "string", "description": "Product name", "example": "Blue T-Shirt" },
+          "sku": { "type": "string", "description": "Product SKU", "example": "SKU-001" },
+          "quantity": { "type": "string", "description": "Quantity as string", "example": "2" },
+          "price": { "type": "string", "description": "Unit price to two decimal places", "example": "99.99" }
+        }
+      }
+    },
+    "merchant": {
+      "type": "object",
+      "description": "Merchant redirect URLs for post-checkout flow",
+      "required": ["redirectConfirmUrl", "redirectCancelUrl"],
+      "properties": {
+        "redirectConfirmUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to redirect consumer after successful payment",
+          "example": "https://example.com/checkout/confirm?status=confirmed"
+        },
+        "redirectCancelUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to redirect consumer after cancelled payment",
+          "example": "https://example.com/checkout/cancel?status=cancelled"
+        }
+      }
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "Merchant's own order reference number",
+      "example": "12345"
+    },
+    "taxAmount": {
+      "type": "number",
+      "description": "Tax amount included in the order total",
+      "example": 0
+    },
+    "shippingAmount": {
+      "type": "number",
+      "description": "Shipping amount included in the order total",
+      "example": 0
+    },
+    "merchantSystemInformation": {
+      "type": "object",
+      "description": "Integration platform metadata for Payflex diagnostics",
+      "properties": {
+        "plugin_version": { "type": "string", "example": "2.7.0" },
+        "php_version": { "type": "string", "example": "8.1.0" },
+        "ecommerce_platform": { "type": "string", "example": "WooCommerce 8.0" },
+        "total_plugin_modules": { "type": "string", "example": "25" },
+        "active_plugin_modules": { "type": "string", "example": "12" }
+      }
+    }
+  }
+}

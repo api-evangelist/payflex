@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payflex/main/json-schema/configuration-response.json",
+  "title": "Configuration Response",
+  "description": "Response returned by GET /configuration with merchant payment amount limits",
+  "type": "object",
+  "properties": {
+    "minimumAmount": {
+      "type": "number",
+      "description": "Minimum order amount eligible for Payflex BNPL installments",
+      "minimum": 0,
+      "example": 100.00
+    },
+    "maximumAmount": {
+      "type": "number",
+      "description": "Maximum order amount eligible for Payflex BNPL installments",
+      "minimum": 0,
+      "example": 8000.00
+    }
+  }
+}

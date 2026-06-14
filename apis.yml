@@ -52,6 +52,8 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
       - type: FinOps
         url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/openapi/openapi.yml
     contact:
       - FN: Payflex Merchant Support
         email: merchants@payflex.co.za

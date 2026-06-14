@@ -1,0 +1,6 @@
+{
+  "orderId": "ord_abc123xyz",
+  "token": "tok_xyz789abc",
+  "redirectUrl": "https://checkout.payflex.co.za/order/ord_abc123xyz",
+  "message": ""
+}

@@ -1,0 +1,189 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "payflex": "https://api.payflex.co.za/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Order": "schema:Order",
+    "PaymentService": "schema:FinancialProduct",
+    "Person": "schema:Person",
+    "PostalAddress": "schema:PostalAddress",
+    "Product": "schema:Product",
+    "OrderItem": "schema:OrderItem",
+    "RefundAction": "schema:RefundAction",
+    "MonetaryAmount": "schema:MonetaryAmount",
+
+    "orderId": {
+      "@id": "payflex:orderId",
+      "@type": "xsd:string"
+    },
+    "orderStatus": {
+      "@id": "schema:orderStatus",
+      "@type": "xsd:string"
+    },
+    "merchantReference": {
+      "@id": "payflex:merchantReference",
+      "@type": "xsd:string"
+    },
+    "token": {
+      "@id": "payflex:token",
+      "@type": "xsd:string"
+    },
+    "redirectUrl": {
+      "@id": "payflex:redirectUrl",
+      "@type": "@id"
+    },
+    "redirectConfirmUrl": {
+      "@id": "payflex:redirectConfirmUrl",
+      "@type": "@id"
+    },
+    "redirectCancelUrl": {
+      "@id": "payflex:redirectCancelUrl",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "taxAmount": {
+      "@id": "payflex:taxAmount",
+      "@type": "xsd:decimal"
+    },
+    "shippingAmount": {
+      "@id": "payflex:shippingAmount",
+      "@type": "xsd:decimal"
+    },
+    "minimumAmount": {
+      "@id": "payflex:minimumAmount",
+      "@type": "xsd:decimal"
+    },
+    "maximumAmount": {
+      "@id": "payflex:maximumAmount",
+      "@type": "xsd:decimal"
+    },
+    "consumer": {
+      "@id": "schema:customer",
+      "@type": "schema:Person"
+    },
+    "givenNames": {
+      "@id": "schema:givenName",
+      "@type": "xsd:string"
+    },
+    "surname": {
+      "@id": "schema:familyName",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "schema:telephone",
+      "@type": "xsd:string"
+    },
+    "billing": {
+      "@id": "schema:billingAddress",
+      "@type": "schema:PostalAddress"
+    },
+    "shipping": {
+      "@id": "schema:deliveryAddress",
+      "@type": "schema:PostalAddress"
+    },
+    "addressLine1": {
+      "@id": "schema:streetAddress",
+      "@type": "xsd:string"
+    },
+    "addressLine2": {
+      "@id": "payflex:addressLine2",
+      "@type": "xsd:string"
+    },
+    "suburb": {
+      "@id": "schema:addressLocality",
+      "@type": "xsd:string"
+    },
+    "postcode": {
+      "@id": "schema:postalCode",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "schema:orderedItem",
+      "@type": "schema:OrderItem"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "sku": {
+      "@id": "schema:sku",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "schema:orderQuantity",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "schema:price",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "payflex:requestId",
+      "@type": "xsd:string"
+    },
+    "isPlugin": {
+      "@id": "payflex:isPlugin",
+      "@type": "xsd:boolean"
+    },
+    "merchantRefundReference": {
+      "@id": "payflex:merchantRefundReference",
+      "@type": "xsd:string"
+    },
+    "refundId": {
+      "@id": "payflex:refundId",
+      "@type": "xsd:string"
+    },
+    "client_id": {
+      "@id": "payflex:clientId",
+      "@type": "xsd:string"
+    },
+    "client_secret": {
+      "@id": "payflex:clientSecret",
+      "@type": "xsd:string"
+    },
+    "grant_type": {
+      "@id": "payflex:grantType",
+      "@type": "xsd:string"
+    },
+    "audience": {
+      "@id": "payflex:audience",
+      "@type": "@id"
+    },
+    "access_token": {
+      "@id": "payflex:accessToken",
+      "@type": "xsd:string"
+    },
+    "token_type": {
+      "@id": "payflex:tokenType",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "payflex:expiresIn",
+      "@type": "xsd:integer"
+    },
+    "errorCode": {
+      "@id": "payflex:errorCode",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "merchantSystemInformation": {
+      "@id": "payflex:merchantSystemInformation"
+    }
+  }
+}

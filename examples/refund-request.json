@@ -1,0 +1,6 @@
+{
+  "requestId": "Order #12345-ab3cd4ef",
+  "amount": 99.99,
+  "isPlugin": true,
+  "merchantRefundReference": "Order #12345-ab3cd4ef"
+}

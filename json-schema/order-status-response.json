@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payflex/main/json-schema/order-status-response.json",
+  "title": "Order Status Response",
+  "description": "Response returned by GET /order/{orderId} containing current order state and details",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Payflex-issued unique order identifier",
+      "example": "ord_abc123xyz"
+    },
+    "orderStatus": {
+      "type": "string",
+      "description": "Current status of the Payflex order",
+      "enum": ["Created", "Initiated", "Approved", "Declined", "Abandoned", "Cancelled"],
+      "example": "Approved"
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "Merchant's own order reference",
+      "example": "12345"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Order total amount",
+      "example": 299.99
+    },
+    "consumer": {
+      "type": "object",
+      "description": "Consumer contact details",
+      "properties": {
+        "phoneNumber": { "type": "string", "example": "+27821234567" },
+        "givenNames": { "type": "string", "example": "Jane" },
+        "surname": { "type": "string", "example": "Smith" },
+        "email": { "type": "string", "format": "email", "example": "jane.smith@example.com" }
+      }
+    }
+  }
+}
