@@ -1,0 +1,94 @@
+name: Payflex
+description: >
+  Payflex is a South African Buy Now Pay Later (BNPL) platform that enables
+  merchants to offer interest-free installment payment options to consumers.
+  Shoppers can split purchases into up to four interest-free payments over six
+  weeks, with the first payment made upfront. Payflex pays merchants the full
+  purchase amount upfront (less a commission) and assumes all credit and fraud
+  risk. The REST API supports hosted and embedded checkout flows, order
+  lifecycle management, refunds, and merchant configuration retrieval.
+image: https://payflex.co.za/wp-content/uploads/2021/06/payflex-logo.png
+tags:
+  - BNPL
+  - Buy Now Pay Later
+  - Payments
+  - Installments
+  - South Africa
+  - Fintech
+  - E-commerce
+created: "2026-06-13"
+modified: "2026-06-13"
+url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/apis.yml
+specificationVersion: "0.19"
+apis:
+  - name: Payflex Merchant API
+    description: >
+      REST API for integrating Payflex BNPL installment payments into
+      e-commerce platforms. Supports order creation with hosted or embedded
+      checkout flows, order status retrieval, full and partial refunds, merchant
+      configuration retrieval, and OAuth2 client-credentials authentication.
+      Merchants provide customer details, billing/shipping addresses, and order
+      amounts; Payflex returns a redirect URL and order token to complete the
+      payment flow.
+    image: https://payflex.co.za/wp-content/uploads/2021/06/payflex-logo.png
+    humanURL: https://docs.payflex.co.za/
+    baseURL: https://api.payflex.co.za
+    tags:
+      - Orders
+      - Payments
+      - Refunds
+      - Merchant Configuration
+      - Authentication
+    properties:
+      - type: Documentation
+        url: https://docs.payflex.co.za/
+      - type: GettingStarted
+        url: https://docs.payflex.co.za/docs/getting-started
+      - type: Authentication
+        url: https://docs.payflex.co.za/docs/getting-started
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Payflex Merchant Support
+        email: merchants@payflex.co.za
+        url: https://payflex.co.za/support/
+    environments:
+      - name: Production
+        url: https://api.payflex.co.za
+      - name: Sandbox
+        url: https://api.uat.payflex.co.za
+common:
+  - type: Website
+    url: https://payflex.co.za/
+  - type: MerchantPortal
+    url: https://merchant.payflex.co.za/login
+  - type: MerchantHub
+    url: https://payflex.co.za/merchant/
+  - type: Support
+    url: https://payflex.co.za/support/
+  - type: TermsOfService
+    url: https://payflex.co.za/terms-conditions/
+  - type: PrivacyPolicy
+    url: https://payflex.co.za/privacy-policy/
+  - type: Blog
+    url: https://payflex.co.za/merchant-hub/
+  - type: GitHub
+    url: https://github.com/PayFlexSA
+  - type: WooCommercePlugin
+    url: https://wordpress.org/plugins/payflex-payment-gateway/
+  - type: WooCommercePluginSource
+    url: https://github.com/PayFlexSA/payflex-woocommerce-plugin
+  - type: MagentoModule
+    url: https://github.com/PayFlexSA/payflex-magento-2-4-module
+  - type: OpenCartExtension
+    url: https://github.com/PayFlexSA/payflex-opencart-4-extension
+  - type: PrestaShopModule
+    url: https://github.com/PayFlexSA/payflex-prestashop-8-module
+maintainers:
+  - FN: API Evangelist
+    email: info@apievangelist.com
+    url: https://apievangelist.com

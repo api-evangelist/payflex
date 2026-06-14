@@ -1,0 +1,32 @@
+name: Payflex Merchant Plans
+description: >
+  Payflex does not publish fixed-tier pricing publicly. Merchant fees are
+  negotiated based on transaction volume and business type. Payflex pays
+  merchants the full purchase amount upfront less a commission, and collects
+  installments from consumers directly, absorbing all credit and fraud risk.
+  Merchants must apply and be onboarded by the Payflex merchant team to receive
+  credentials (client_id and client_secret) for API access.
+plans:
+  - name: Standard Merchant
+    description: >
+      Default plan for merchants integrated via the Payflex Merchant API. Fee
+      is calculated as a percentage of transaction volume; exact rate is
+      negotiated during onboarding. No fixed monthly fee is published. Merchants
+      receive same-day or next-business-day settlement of the full order value
+      less the applicable commission.
+    features:
+      - Hosted Checkout (redirect flow)
+      - Embedded Checkout (on-site iFrame flow)
+      - Full and partial refunds via API
+      - Webhook / status callback notifications
+      - Merchant configuration endpoint (payment limits)
+      - OAuth2 client credentials authentication
+      - Sandbox / UAT environment access
+      - Integration support for WooCommerce, Shopify, Magento, OpenCart, PrestaShop
+    pricing: Contact Payflex for volume-based commission rate
+    contact: https://payflex.co.za/merchant/
+notes: >
+  Specific fee percentages are not disclosed publicly. Payflex indicates that
+  the commission is "nominal" and volume-dependent, consistent with BNPL
+  provider practices in South Africa (typically 3–6% MDR range based on
+  industry comparables). Merchants should contact Payflex directly for a quote.

@@ -1,0 +1,49 @@
+name: Payflex FinOps
+description: >
+  Financial operations guidance for teams integrating the Payflex Merchant API.
+  Covers cost structure, settlement model, reconciliation, and refund handling
+  from a FinOps perspective.
+cost_model:
+  type: Commission / Merchant Discount Rate (MDR)
+  description: >
+    Payflex charges merchants a percentage-based commission on each transaction.
+    The exact rate is negotiated during onboarding and depends on monthly GMV
+    (Gross Merchandise Volume). There are no published monthly platform fees or
+    per-seat charges for API access. API credentials are provided at no
+    additional cost as part of the merchant agreement.
+  published_rate: Not disclosed publicly; volume-dependent
+  contact_for_pricing: https://payflex.co.za/merchant/
+settlement:
+  model: Upfront settlement to merchant
+  description: >
+    Payflex settles the full order value to the merchant upfront (net of
+    commission) regardless of the consumer instalment schedule. Merchants are
+    not exposed to consumer default risk — Payflex absorbs all credit and fraud
+    risk. Settlement timing should be confirmed with the Payflex merchant team
+    during onboarding.
+refunds:
+  description: >
+    Full and partial refunds are supported via POST /order/{orderId}/refund.
+    Refunds are processed back to the consumer; the commission portion is
+    typically credited back to the merchant proportionally. Use a unique
+    requestId to ensure idempotency. The amount field accepts partial amounts
+    for partial refunds.
+  idempotency: requestId field in refund payload
+cost_visibility:
+  - Review the Payflex merchant dashboard at https://merchant.payflex.co.za/
+    for transaction-level reporting and commission deductions.
+  - Reconcile API-generated orderId values against dashboard entries to
+    track settlement amounts.
+  - Monitor refund volumes separately — reversed transactions will reduce
+    net settlement for the relevant period.
+  - Log all API response amounts (including commission-adjusted figures)
+    at the application layer for internal cost attribution.
+optimization:
+  - Cache the OAuth2 access token to avoid unnecessary authentication calls
+    (no direct cost, but reduces latency and potential throttling).
+  - Cache the /configuration endpoint response to avoid redundant calls
+    that don't contribute to revenue-generating transactions.
+  - Use the statusCallbackUrl webhook to eliminate polling loops, reducing
+    infrastructure load and cost.
+  - Negotiate lower MDR rates at higher transaction volumes — revisit the
+    rate agreement annually as GMV grows.

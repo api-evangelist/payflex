@@ -1,0 +1,42 @@
+name: Payflex API Rate Limits
+description: >
+  Payflex does not publish explicit rate limit figures in its public
+  documentation. The API is designed for merchant-initiated e-commerce
+  transactions (order creation, status checks, refunds) rather than
+  high-frequency bulk calls. Standard REST best practices apply: implement
+  exponential back-off on HTTP 429 or 503 responses, and avoid polling the
+  order status endpoint more frequently than necessary — Payflex delivers
+  order status updates via statusCallbackUrl webhook instead.
+rate_limits:
+  - scope: Authentication
+    endpoint: "POST https://auth.payflex.co.za/auth/merchant"
+    notes: >
+      Access tokens are short-lived. Cache the token and reuse it until
+      expiry rather than requesting a new token per API call. Excessive
+      token requests may be throttled.
+  - scope: Order Operations
+    endpoint: "POST https://api.payflex.co.za/order/productSelect"
+    notes: >
+      No published limit. Intended for real-time checkout flows; one call
+      per consumer checkout session is the expected usage pattern.
+  - scope: Order Status Retrieval
+    endpoint: "GET https://api.payflex.co.za/order/{orderId}"
+    notes: >
+      Prefer the statusCallbackUrl webhook for order status updates.
+      Polling should be used only for reconciliation; poll infrequently
+      (e.g., once per minute or less).
+  - scope: Refunds
+    endpoint: "POST https://api.payflex.co.za/order/{orderId}/refund"
+    notes: >
+      Idempotent when a unique requestId is supplied. Avoid duplicate
+      refund submissions for the same orderId and amount.
+  - scope: Configuration
+    endpoint: "GET https://api.payflex.co.za/configuration"
+    notes: >
+      Returns merchant-specific payment limits. Cache this response;
+      it rarely changes and does not need to be fetched on every request.
+recommendations:
+  - Implement OAuth2 token caching and refresh logic
+  - Use the statusCallbackUrl webhook for order lifecycle events
+  - Apply exponential back-off on 4xx/5xx responses
+  - Contact Payflex support for volume-specific guidance on limits
