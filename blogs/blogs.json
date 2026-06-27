@@ -2,6 +2,13 @@
   "repo": "payflex",
   "feeds": [
     {
+      "source": "https://payflex.co.za/feed/",
+      "feed_url": "https://payflex.co.za/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://payflex.co.za/privacy-policy/",
       "feed_url": "https://payflex.co.za/feed/",
       "title": "",
@@ -10,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }
