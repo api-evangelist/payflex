@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth2 Bearer token obtained from the /auth/merchant endpoint using the client_credentials
+    grant. Tokens expire and should be refreshed automatically before expiry.
+  sources:
+  - openapi/openapi.yml

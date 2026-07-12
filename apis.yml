@@ -64,6 +64,10 @@ apis:
       - name: Sandbox
         url: https://api.uat.payflex.co.za
 common:
+  - type: DomainSecurity
+    url: security/payflex-domain-security.yml
+  - type: Authentication
+    url: authentication/payflex-authentication.yml
   - type: Website
     url: https://payflex.co.za/
   - type: MerchantPortal
