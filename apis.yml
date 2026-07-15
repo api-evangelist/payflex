@@ -64,6 +64,8 @@ apis:
       - name: Sandbox
         url: https://api.uat.payflex.co.za
 common:
+  - type: AgenticAccess
+    url: agentic-access/payflex-agentic-access.yml
   - type: DomainSecurity
     url: security/payflex-domain-security.yml
   - type: Authentication
