@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Payflex Merchant Authentication API
+  description: 'REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Payflex Merchant Support
+    email: merchants@payflex.co.za
+    url: https://payflex.co.za/support/
+  termsOfService: https://payflex.co.za/terms-conditions/
+  license:
+    name: Proprietary
+    url: https://payflex.co.za/terms-conditions/
+servers:
+- url: https://api.payflex.co.za
+  description: Production
+- url: https://api.uat.payflex.co.za
+  description: Sandbox (UAT)
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: OAuth2 client credentials token endpoint
+paths:
+  /auth/merchant:
+    post:
+      tags:
+      - Authentication
+      summary: Obtain an OAuth2 access token
+      description: 'Exchange client credentials (client_id and client_secret) for a Bearer access token using the OAuth2 client_credentials grant type. Tokens are short-lived and should be cached until near expiry. Production auth endpoint: https://auth.payflex.co.za/auth/merchant. Sandbox auth endpoint: https://auth-uat.payflex.co.za/auth/merchant.
+
+        '
+      operationId: getAccessToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            example:
+              client_id: your-client-id
+              client_secret: your-client-secret
+              audience: https://auth-production.payflex.co.za
+              grant_type: client_credentials
+      responses:
+        '200':
+          description: Access token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid client credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for API authentication
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Token lifetime in seconds
+          example: 3600
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
+    TokenRequest:
+      type: object
+      required:
+      - client_id
+      - client_secret
+      - audience
+      - grant_type
+      properties:
+        client_id:
+          type: string
+          description: Merchant client identifier issued by Payflex
+          example: your-client-id
+        client_secret:
+          type: string
+          description: Merchant client secret issued by Payflex
+          example: your-client-secret
+        audience:
+          type: string
+          description: 'OAuth2 audience — production: https://auth-production.payflex.co.za, sandbox: https://auth-dev.payflex.co.za
+
+            '
+          example: https://auth-production.payflex.co.za
+        grant_type:
+          type: string
+          enum:
+          - client_credentials
+          description: OAuth2 grant type — must be client_credentials
+          example: client_credentials
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer token obtained from the /auth/merchant endpoint using the client_credentials grant. Tokens expire and should be refreshed automatically before expiry.
+
+        '
+externalDocs:
+  description: Payflex Developer Documentation
+  url: https://docs.payflex.co.za/

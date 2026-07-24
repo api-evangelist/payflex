@@ -1,0 +1,85 @@
+openapi: 3.1.0
+info:
+  title: Payflex Merchant Authentication Configuration API
+  description: 'REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Payflex Merchant Support
+    email: merchants@payflex.co.za
+    url: https://payflex.co.za/support/
+  termsOfService: https://payflex.co.za/terms-conditions/
+  license:
+    name: Proprietary
+    url: https://payflex.co.za/terms-conditions/
+servers:
+- url: https://api.payflex.co.za
+  description: Production
+- url: https://api.uat.payflex.co.za
+  description: Sandbox (UAT)
+security:
+- bearerAuth: []
+tags:
+- name: Configuration
+  description: Retrieve merchant payment limits and settings
+paths:
+  /configuration:
+    get:
+      tags:
+      - Configuration
+      summary: Retrieve merchant configuration
+      description: 'Retrieve the merchant''s Payflex configuration including minimum and maximum order amount limits. Used by integrations to enforce eligibility rules on the checkout page.
+
+        '
+      operationId: getConfiguration
+      responses:
+        '200':
+          description: Configuration retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
+    ConfigurationResponse:
+      type: object
+      properties:
+        minimumAmount:
+          type: number
+          format: float
+          description: Minimum order amount eligible for Payflex BNPL
+          example: 100.0
+        maximumAmount:
+          type: number
+          format: float
+          description: Maximum order amount eligible for Payflex BNPL
+          example: 8000.0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer token obtained from the /auth/merchant endpoint using the client_credentials grant. Tokens expire and should be refreshed automatically before expiry.
+
+        '
+externalDocs:
+  description: Payflex Developer Documentation
+  url: https://docs.payflex.co.za/

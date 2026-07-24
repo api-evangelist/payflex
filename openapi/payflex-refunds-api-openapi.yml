@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: Payflex Merchant Authentication Refunds API
+  description: 'REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Payflex Merchant Support
+    email: merchants@payflex.co.za
+    url: https://payflex.co.za/support/
+  termsOfService: https://payflex.co.za/terms-conditions/
+  license:
+    name: Proprietary
+    url: https://payflex.co.za/terms-conditions/
+servers:
+- url: https://api.payflex.co.za
+  description: Production
+- url: https://api.uat.payflex.co.za
+  description: Sandbox (UAT)
+security:
+- bearerAuth: []
+tags:
+- name: Refunds
+  description: Initiate full or partial refunds on completed orders
+paths:
+  /order/{orderId}/refund:
+    post:
+      tags:
+      - Refunds
+      summary: Initiate a refund on an order
+      description: 'Submit a full or partial refund request for a completed (Approved) Payflex order. A unique requestId must be provided with each refund request. Partial refunds are supported by specifying an amount less than the original order total.
+
+        '
+      operationId: createRefund
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The Payflex-issued order identifier to refund
+        example: ord_abc123xyz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+            example:
+              requestId: 'Order #12345-ab3cd4ef'
+              amount: 99.99
+              isPlugin: true
+              merchantRefundReference: 'Order #12345-ab3cd4ef'
+      responses:
+        '200':
+          description: Refund processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '201':
+          description: Refund created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '400':
+          description: Invalid refund request or business rule violation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    RefundErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code (e.g., MRM007 for business rule violations)
+          example: MRM007
+        message:
+          type: string
+          description: Human-readable error description
+          example: Refund amount exceeds the remaining refundable balance
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          description: Payflex-issued refund identifier
+          example: ref_xyz456abc
+        orderId:
+          type: string
+          description: The order that was refunded
+          example: ord_abc123xyz
+        amount:
+          type: number
+          format: float
+          description: Amount refunded
+          example: 99.99
+        status:
+          type: string
+          description: Refund status
+          example: Approved
+    RefundRequest:
+      type: object
+      required:
+      - requestId
+      - amount
+      properties:
+        requestId:
+          type: string
+          description: 'Unique identifier for the refund request. Must be unique per refund attempt to prevent duplicates.
+
+            '
+          example: 'Order #12345-ab3cd4ef'
+        amount:
+          type: number
+          format: float
+          description: Refund amount. May be less than the original order total for partial refunds.
+          example: 99.99
+        isPlugin:
+          type: boolean
+          description: Indicates the refund was initiated from a plugin integration
+          example: true
+        merchantRefundReference:
+          type: string
+          description: Merchant's reference for this refund
+          example: 'Order #12345-ab3cd4ef'
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 Bearer token obtained from the /auth/merchant endpoint using the client_credentials grant. Tokens expire and should be refreshed automatically before expiry.
+
+        '
+externalDocs:
+  description: Payflex Developer Documentation
+  url: https://docs.payflex.co.za/
