@@ -7,6 +7,19 @@ description: >
   purchase amount upfront (less a commission) and assumes all credit and fraud
   risk. The REST API supports hosted and embedded checkout flows, order
   lifecycle management, refunds, and merchant configuration retrieval.
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://payflex.co.za/wp-content/uploads/2021/06/payflex-logo.png
 tags:
   - BNPL
@@ -21,48 +34,102 @@ modified: "2026-06-13"
 url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/apis.yml
 specificationVersion: "0.19"
 apis:
-  - name: Payflex Merchant API
-    description: >
-      REST API for integrating Payflex BNPL installment payments into
-      e-commerce platforms. Supports order creation with hosted or embedded
-      checkout flows, order status retrieval, full and partial refunds, merchant
-      configuration retrieval, and OAuth2 client-credentials authentication.
-      Merchants provide customer details, billing/shipping addresses, and order
-      amounts; Payflex returns a redirect URL and order token to complete the
-      payment flow.
-    image: https://payflex.co.za/wp-content/uploads/2021/06/payflex-logo.png
-    humanURL: https://docs.payflex.co.za/
-    baseURL: https://api.payflex.co.za
-    tags:
-      - Orders
-      - Payments
-      - Refunds
-      - Merchant Configuration
-      - Authentication
-    properties:
-      - type: Documentation
-        url: https://docs.payflex.co.za/
-      - type: GettingStarted
-        url: https://docs.payflex.co.za/docs/getting-started
-      - type: Authentication
-        url: https://docs.payflex.co.za/docs/getting-started
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/openapi/openapi.yml
-    contact:
-      - FN: Payflex Merchant Support
-        email: merchants@payflex.co.za
-        url: https://payflex.co.za/support/
-    environments:
-      - name: Production
-        url: https://api.payflex.co.za
-      - name: Sandbox
-        url: https://api.uat.payflex.co.za
+- aid: payflex:payflex-authentication-api
+  name: Payflex Authentication API
+  description: OAuth2 client credentials token endpoint
+  humanURL: https://docs.payflex.co.za/
+  baseURL: https://api.payflex.co.za
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/payflex-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.payflex.co.za/
+  - type: GettingStarted
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Authentication
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
+- aid: payflex:payflex-configuration-api
+  name: Payflex Configuration API
+  description: Retrieve merchant payment limits and settings
+  humanURL: https://docs.payflex.co.za/
+  baseURL: https://api.payflex.co.za
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/payflex-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.payflex.co.za/
+  - type: GettingStarted
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Authentication
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
+- aid: payflex:payflex-orders-api
+  name: Payflex Orders API
+  description: Create and manage BNPL payment orders
+  humanURL: https://docs.payflex.co.za/
+  baseURL: https://api.payflex.co.za
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/payflex-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.payflex.co.za/
+  - type: GettingStarted
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Authentication
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
+- aid: payflex:payflex-refunds-api
+  name: Payflex Refunds API
+  description: Initiate full or partial refunds on completed orders
+  humanURL: https://docs.payflex.co.za/
+  baseURL: https://api.payflex.co.za
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/payflex-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.payflex.co.za/
+  - type: GettingStarted
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Authentication
+    url: https://docs.payflex.co.za/docs/getting-started
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payflex/refs/heads/main/finops/finops.yml
 common:
   - type: AgenticAccess
     url: agentic-access/payflex-agentic-access.yml
