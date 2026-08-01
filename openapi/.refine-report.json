@@ -1,0 +1,20 @@
+{
+  "provider": "payflex",
+  "sources": [
+    "payflex-authentication-api-openapi.yml",
+    "payflex-configuration-api-openapi.yml",
+    "payflex-orders-api-openapi.yml",
+    "payflex-refunds-api-openapi.yml"
+  ],
+  "outputs": [
+    "payflex-authentication-api-openapi.yml",
+    "payflex-configuration-api-openapi.yml",
+    "payflex-orders-api-openapi.yml",
+    "payflex-refunds-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
