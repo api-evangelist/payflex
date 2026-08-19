@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payflex Merchant Authentication Refunds API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate a refund on an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.payflex.co.za/order/:orderId/refund",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "ord_abc123xyz",
+                "type": "path",
+                "description": "The Payflex-issued order identifier to refund"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a full or partial refund request for a completed (Approved) Payflex order. A unique requestId must be provided with each refund request. Partial refunds are supported by specifying an amount less than the original order total.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

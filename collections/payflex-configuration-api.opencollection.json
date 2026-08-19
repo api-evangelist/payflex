@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payflex Merchant Authentication Configuration API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve merchant configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.payflex.co.za/configuration"
+          },
+          "docs": "Retrieve the merchant's Payflex configuration including minimum and maximum order amount limits. Used by integrations to enforce eligibility rules on the checkout page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

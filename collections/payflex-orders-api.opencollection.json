@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payflex Merchant Authentication Orders API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new BNPL order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.payflex.co.za/order/productSelect",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Payflex installment payment order. Returns a redirectUrl for the consumer to complete the payment flow on the Payflex hosted checkout, as well as an orderId and token for order tracking. Merchants must supply consumer details, billing and shipping addresses, line items, total amount, and redirect URLs for confirmed and cancelled states.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve order status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.payflex.co.za/order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "ord_abc123xyz",
+                "type": "path",
+                "description": "The Payflex-issued order identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the current status and details of a Payflex order by its orderId. Possible orderStatus values include: Created, Initiated, Approved, Declined, Abandoned, Cancelled.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

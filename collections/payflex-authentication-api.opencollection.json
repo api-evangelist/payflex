@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payflex Merchant Authentication API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain an OAuth2 access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.payflex.co.za/auth/merchant",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange client credentials (client_id and client_secret) for a Bearer access token using the OAuth2 client_credentials grant type. Tokens are short-lived and should be cached until near expiry. Production auth endpoint: https://auth.payflex.co.za/auth/merchant. Sandbox auth endpoint: https://auth-uat.payflex.co.za/auth/merchant.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

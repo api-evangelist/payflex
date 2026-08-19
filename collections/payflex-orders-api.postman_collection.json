@@ -1,0 +1,446 @@
+{
+  "item": [
+    {
+      "id": "f5492fec-af4b-46f9-9516-59747a1262bc",
+      "name": "Orders",
+      "description": {
+        "content": "Create and manage BNPL payment orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2d3d719-03eb-42ca-8672-593f37dbda19",
+          "name": "Create a new BNPL order",
+          "request": {
+            "name": "Create a new BNPL order",
+            "description": {
+              "content": "Create a new Payflex installment payment order. Returns a redirectUrl for the consumer to complete the payment flow on the Payflex hosted checkout, as well as an orderId and token for order tracking. Merchants must supply consumer details, billing and shipping addresses, line items, total amount, and redirect URLs for confirmed and cancelled states.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "productSelect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"consumer\": {\n    \"phoneNumber\": \"<string>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"email\": \"<email>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<uri>\",\n    \"redirectCancelUrl\": \"<uri>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"suburb\": \"<string>\",\n    \"postcode\": \"<string>\"\n  },\n  \"shipping\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"suburb\": \"<string>\",\n    \"postcode\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<string>\",\n      \"price\": \"<string>\",\n      \"sku\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<string>\",\n      \"price\": \"<string>\",\n      \"sku\": \"<string>\"\n    }\n  ],\n  \"taxAmount\": \"<float>\",\n  \"shippingAmount\": \"<float>\",\n  \"merchantSystemInformation\": {\n    \"plugin_version\": \"<string>\",\n    \"php_version\": \"<string>\",\n    \"ecommerce_platform\": \"<string>\",\n    \"total_plugin_modules\": \"<string>\",\n    \"active_plugin_modules\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d2086e7-7781-4bd7-89f3-6a3a88aa0171",
+              "name": "Order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "productSelect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"299.99\",\n  \"consumer\": {\n    \"phoneNumber\": \"+27821234567\",\n    \"givenNames\": \"Jane\",\n    \"surname\": \"Smith\",\n    \"email\": \"jane.smith@example.com\"\n  },\n  \"billing\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"shipping\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"description\": \"Order from Example Store\",\n  \"items\": [\n    {\n      \"name\": \"Blue T-Shirt\",\n      \"sku\": \"SKU-001\",\n      \"quantity\": \"2\",\n      \"price\": \"99.99\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"https://example.com/checkout/confirm?status=confirmed\",\n    \"redirectCancelUrl\": \"https://example.com/checkout/cancel?status=cancelled\"\n  },\n  \"merchantReference\": \"12345\",\n  \"taxAmount\": 0,\n  \"shippingAmount\": 0,\n  \"merchantSystemInformation\": {\n    \"plugin_version\": \"2.7.0\",\n    \"php_version\": \"8.1.0\",\n    \"ecommerce_platform\": \"WooCommerce 8.0\",\n    \"total_plugin_modules\": \"25\",\n    \"active_plugin_modules\": \"12\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"ord_abc123xyz\",\n  \"token\": \"tok_xyz789abc\",\n  \"redirectUrl\": \"https://checkout.payflex.co.za/order/ord_abc123xyz\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06b0853-035d-4d85-97be-a1bdec24c985",
+              "name": "Invalid request payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "productSelect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"299.99\",\n  \"consumer\": {\n    \"phoneNumber\": \"+27821234567\",\n    \"givenNames\": \"Jane\",\n    \"surname\": \"Smith\",\n    \"email\": \"jane.smith@example.com\"\n  },\n  \"billing\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"shipping\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"description\": \"Order from Example Store\",\n  \"items\": [\n    {\n      \"name\": \"Blue T-Shirt\",\n      \"sku\": \"SKU-001\",\n      \"quantity\": \"2\",\n      \"price\": \"99.99\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"https://example.com/checkout/confirm?status=confirmed\",\n    \"redirectCancelUrl\": \"https://example.com/checkout/cancel?status=cancelled\"\n  },\n  \"merchantReference\": \"12345\",\n  \"taxAmount\": 0,\n  \"shippingAmount\": 0,\n  \"merchantSystemInformation\": {\n    \"plugin_version\": \"2.7.0\",\n    \"php_version\": \"8.1.0\",\n    \"ecommerce_platform\": \"WooCommerce 8.0\",\n    \"total_plugin_modules\": \"25\",\n    \"active_plugin_modules\": \"12\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UNAUTHORIZED\",\n  \"message\": \"Access token is missing or invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0319eed8-2b9a-432f-b63a-a9848aa3e13d",
+              "name": "Unauthorized — invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "productSelect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"299.99\",\n  \"consumer\": {\n    \"phoneNumber\": \"+27821234567\",\n    \"givenNames\": \"Jane\",\n    \"surname\": \"Smith\",\n    \"email\": \"jane.smith@example.com\"\n  },\n  \"billing\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"shipping\": {\n    \"addressLine1\": \"12 Main Street\",\n    \"addressLine2\": \"Apt 3\",\n    \"suburb\": \"Cape Town\",\n    \"postcode\": \"8001\"\n  },\n  \"description\": \"Order from Example Store\",\n  \"items\": [\n    {\n      \"name\": \"Blue T-Shirt\",\n      \"sku\": \"SKU-001\",\n      \"quantity\": \"2\",\n      \"price\": \"99.99\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"https://example.com/checkout/confirm?status=confirmed\",\n    \"redirectCancelUrl\": \"https://example.com/checkout/cancel?status=cancelled\"\n  },\n  \"merchantReference\": \"12345\",\n  \"taxAmount\": 0,\n  \"shippingAmount\": 0,\n  \"merchantSystemInformation\": {\n    \"plugin_version\": \"2.7.0\",\n    \"php_version\": \"8.1.0\",\n    \"ecommerce_platform\": \"WooCommerce 8.0\",\n    \"total_plugin_modules\": \"25\",\n    \"active_plugin_modules\": \"12\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UNAUTHORIZED\",\n  \"message\": \"Access token is missing or invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89eaaf6d-4f49-4724-9b0a-b0f0b8d02dd3",
+          "name": "Retrieve order status",
+          "request": {
+            "name": "Retrieve order status",
+            "description": {
+              "content": "Retrieve the current status and details of a Payflex order by its orderId. Possible orderStatus values include: Created, Initiated, Approved, Declined, Abandoned, Cancelled.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The Payflex-issued order identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "257a48d5-9130-4951-9bb2-cc8116eb1c3b",
+              "name": "Order details retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The Payflex-issued order identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"ord_abc123xyz\",\n  \"orderStatus\": \"Abandoned\",\n  \"merchantReference\": \"12345\",\n  \"amount\": 299.99,\n  \"consumer\": {\n    \"phoneNumber\": \"+27821234567\",\n    \"givenNames\": \"Jane\",\n    \"surname\": \"Smith\",\n    \"email\": \"jane.smith@example.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bf71e4f-f2e2-4f73-b349-fd0a53f56dc2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The Payflex-issued order identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UNAUTHORIZED\",\n  \"message\": \"Access token is missing or invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65d4fced-6be6-42e2-bc68-94af111d00af",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The Payflex-issued order identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UNAUTHORIZED\",\n  \"message\": \"Access token is missing or invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.payflex.co.za",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a393f7f-4908-4cd5-a4a5-c691682495b6",
+    "name": "Payflex Merchant Authentication Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.\n\n\nContact Support:\n Name: Payflex Merchant Support\n Email: merchants@payflex.co.za",
+      "type": "text/plain"
+    }
+  }
+}
