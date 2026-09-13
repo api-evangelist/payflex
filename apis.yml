@@ -35,7 +35,6 @@ accessModel:
   method: derived
 image: https://payflex.co.za/wp-content/uploads/2021/06/payflex-logo.png
 tags:
-  - BNPL
   - Buy Now Pay Later
   - Payments
   - Installments
