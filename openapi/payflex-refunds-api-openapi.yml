@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Payflex Merchant Authentication Refunds API
-  description: 'REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.
-
-    '
+  title: Payflex Merchant Refunds API
+  description: REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms.
   version: 1.0.0
   contact:
     name: Payflex Merchant Support
@@ -29,9 +27,7 @@ paths:
       tags:
       - Refunds
       summary: Initiate a refund on an order
-      description: 'Submit a full or partial refund request for a completed (Approved) Payflex order. A unique requestId must be provided with each refund request. Partial refunds are supported by specifying an amount less than the original order total.
-
-        '
+      description: Submit a full or partial refund request for a completed (Approved) Payflex order. A unique requestId must be provided with each refund request. Partial refunds are supported by specifying an amount less than the original order total.
       operationId: createRefund
       parameters:
       - name: orderId
@@ -85,17 +81,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    RefundErrorResponse:
+    ErrorResponse:
       type: object
       properties:
         errorCode:
           type: string
-          description: Machine-readable error code (e.g., MRM007 for business rule violations)
-          example: MRM007
+          description: Machine-readable error code
+          example: UNAUTHORIZED
         message:
           type: string
           description: Human-readable error description
-          example: Refund amount exceeds the remaining refundable balance
+          example: Access token is missing or invalid
     RefundResponse:
       type: object
       properties:
@@ -116,6 +112,17 @@ components:
           type: string
           description: Refund status
           example: Approved
+    RefundErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code (e.g., MRM007 for business rule violations)
+          example: MRM007
+        message:
+          type: string
+          description: Human-readable error description
+          example: Refund amount exceeds the remaining refundable balance
     RefundRequest:
       type: object
       required:
@@ -141,17 +148,6 @@ components:
           type: string
           description: Merchant's reference for this refund
           example: 'Order #12345-ab3cd4ef'
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

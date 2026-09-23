@@ -1,10 +1,7 @@
 {
   "provider": "payflex",
   "sources": [
-    "payflex-authentication-api-openapi.yml",
-    "payflex-configuration-api-openapi.yml",
-    "payflex-orders-api-openapi.yml",
-    "payflex-refunds-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "payflex-authentication-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "payflex-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payflex-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payflex-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payflex-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Payflex Merchant Authentication Configuration API
-  description: 'REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms. Supports order creation with hosted or embedded checkout flows, order status retrieval, full and partial refunds, merchant configuration retrieval, and OAuth2 client-credentials authentication. Merchants provide customer details, billing/shipping addresses, and order amounts; Payflex returns a redirect URL and order token to complete the payment flow. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk.
-
-    '
+  title: Payflex Merchant Configuration API
+  description: REST API for integrating Payflex Buy Now Pay Later (BNPL) installment payments into e-commerce platforms.
   version: 1.0.0
   contact:
     name: Payflex Merchant Support
@@ -29,9 +27,7 @@ paths:
       tags:
       - Configuration
       summary: Retrieve merchant configuration
-      description: 'Retrieve the merchant''s Payflex configuration including minimum and maximum order amount limits. Used by integrations to enforce eligibility rules on the checkout page.
-
-        '
+      description: Retrieve the merchant's Payflex configuration including minimum and maximum order amount limits. Used by integrations to enforce eligibility rules on the checkout page.
       operationId: getConfiguration
       responses:
         '200':
