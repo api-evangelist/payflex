@@ -62,31 +62,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: Bearer token for API authentication
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
-        token_type:
-          type: string
-          example: Bearer
-        expires_in:
-          type: integer
-          description: Token lifetime in seconds
-          example: 3600
     TokenRequest:
       type: object
       required:
@@ -115,6 +90,31 @@ components:
           - client_credentials
           description: OAuth2 grant type — must be client_credentials
           example: client_credentials
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for API authentication
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Token lifetime in seconds
+          example: 3600
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

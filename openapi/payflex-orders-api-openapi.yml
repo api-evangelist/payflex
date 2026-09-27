@@ -125,61 +125,25 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    OrderStatus:
-      type: string
-      enum:
-      - Created
-      - Initiated
-      - Approved
-      - Declined
-      - Abandoned
-      - Cancelled
-      description: 'Current status of the Payflex order: - Created: Order created, consumer not yet started checkout - Initiated: Consumer has started the checkout process - Approved: Payment approved, funds will be settled - Declined: Payment declined - Abandoned: Consumer did not complete the checkout - Cancelled: Order was cancelled
-
-        '
-    OrderItem:
-      type: object
-      required:
-      - name
-      - quantity
-      - price
-      properties:
-        name:
-          type: string
-          description: Product name
-          example: Blue T-Shirt
-        sku:
-          type: string
-          description: Product SKU
-          example: SKU-001
-        quantity:
-          type: string
-          description: Quantity ordered (as string)
-          example: '2'
-        price:
-          type: string
-          description: Unit price (as string with two decimal places)
-          example: '99.99'
-    OrderStatusResponse:
+    Address:
       type: object
       properties:
-        orderId:
+        addressLine1:
           type: string
-          description: Payflex-issued order identifier
-          example: ord_abc123xyz
-        orderStatus:
-          $ref: '#/components/schemas/OrderStatus'
-        merchantReference:
+          description: Street address line 1
+          example: 12 Main Street
+        addressLine2:
           type: string
-          description: Merchant's own order reference
-          example: '12345'
-        amount:
-          type: number
-          format: float
-          description: Order total amount
-          example: 299.99
-        consumer:
-          $ref: '#/components/schemas/Consumer'
+          description: Street address line 2 (apartment, suite, etc.)
+          example: Apt 3
+        suburb:
+          type: string
+          description: Suburb or city
+          example: Cape Town
+        postcode:
+          type: string
+          description: Postal code
+          example: '8001'
     Consumer:
       type: object
       required:
@@ -205,37 +169,6 @@ components:
           format: email
           description: Consumer's email address
           example: jane.smith@example.com
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
-    CreateOrderResponse:
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Payflex-issued order identifier
-          example: ord_abc123xyz
-        token:
-          type: string
-          description: Order token for status tracking
-          example: tok_xyz789abc
-        redirectUrl:
-          type: string
-          format: uri
-          description: URL to redirect the consumer to complete the Payflex checkout
-          example: https://checkout.payflex.co.za/order/ord_abc123xyz
-        message:
-          type: string
-          description: Error or informational message (on failure)
-          example: ''
     CreateOrderRequest:
       type: object
       required:
@@ -281,25 +214,42 @@ components:
           example: 0
         merchantSystemInformation:
           $ref: '#/components/schemas/MerchantSystemInformation'
-    Address:
+    MerchantRedirects:
+      type: object
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      properties:
+        redirectConfirmUrl:
+          type: string
+          format: uri
+          description: URL to redirect the consumer after a successful payment
+          example: https://example.com/checkout/confirm?status=confirmed
+        redirectCancelUrl:
+          type: string
+          format: uri
+          description: URL to redirect the consumer after a cancelled payment
+          example: https://example.com/checkout/cancel?status=cancelled
+    OrderStatusResponse:
       type: object
       properties:
-        addressLine1:
+        orderId:
           type: string
-          description: Street address line 1
-          example: 12 Main Street
-        addressLine2:
+          description: Payflex-issued order identifier
+          example: ord_abc123xyz
+        orderStatus:
+          $ref: '#/components/schemas/OrderStatus'
+        merchantReference:
           type: string
-          description: Street address line 2 (apartment, suite, etc.)
-          example: Apt 3
-        suburb:
-          type: string
-          description: Suburb or city
-          example: Cape Town
-        postcode:
-          type: string
-          description: Postal code
-          example: '8001'
+          description: Merchant's own order reference
+          example: '12345'
+        amount:
+          type: number
+          format: float
+          description: Order total amount
+          example: 299.99
+        consumer:
+          $ref: '#/components/schemas/Consumer'
     MerchantSystemInformation:
       type: object
       properties:
@@ -323,22 +273,72 @@ components:
           type: string
           description: Number of active modules/plugins
           example: '12'
-    MerchantRedirects:
+    CreateOrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Payflex-issued order identifier
+          example: ord_abc123xyz
+        token:
+          type: string
+          description: Order token for status tracking
+          example: tok_xyz789abc
+        redirectUrl:
+          type: string
+          format: uri
+          description: URL to redirect the consumer to complete the Payflex checkout
+          example: https://checkout.payflex.co.za/order/ord_abc123xyz
+        message:
+          type: string
+          description: Error or informational message (on failure)
+          example: ''
+    OrderItem:
       type: object
       required:
-      - redirectConfirmUrl
-      - redirectCancelUrl
+      - name
+      - quantity
+      - price
       properties:
-        redirectConfirmUrl:
+        name:
           type: string
-          format: uri
-          description: URL to redirect the consumer after a successful payment
-          example: https://example.com/checkout/confirm?status=confirmed
-        redirectCancelUrl:
+          description: Product name
+          example: Blue T-Shirt
+        sku:
           type: string
-          format: uri
-          description: URL to redirect the consumer after a cancelled payment
-          example: https://example.com/checkout/cancel?status=cancelled
+          description: Product SKU
+          example: SKU-001
+        quantity:
+          type: string
+          description: Quantity ordered (as string)
+          example: '2'
+        price:
+          type: string
+          description: Unit price (as string with two decimal places)
+          example: '99.99'
+    OrderStatus:
+      type: string
+      enum:
+      - Created
+      - Initiated
+      - Approved
+      - Declined
+      - Abandoned
+      - Cancelled
+      description: 'Current status of the Payflex order: - Created: Order created, consumer not yet started checkout - Initiated: Consumer has started the checkout process - Approved: Payment approved, funds will be settled - Declined: Payment declined - Abandoned: Consumer did not complete the checkout - Cancelled: Order was cancelled
+
+        '
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

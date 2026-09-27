@@ -81,17 +81,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
     RefundResponse:
       type: object
       properties:
@@ -112,17 +101,6 @@ components:
           type: string
           description: Refund status
           example: Approved
-    RefundErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code (e.g., MRM007 for business rule violations)
-          example: MRM007
-        message:
-          type: string
-          description: Human-readable error description
-          example: Refund amount exceeds the remaining refundable balance
     RefundRequest:
       type: object
       required:
@@ -148,6 +126,28 @@ components:
           type: string
           description: Merchant's reference for this refund
           example: 'Order #12345-ab3cd4ef'
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
+    RefundErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code (e.g., MRM007 for business rule violations)
+          example: MRM007
+        message:
+          type: string
+          description: Human-readable error description
+          example: Refund amount exceeds the remaining refundable balance
   securitySchemes:
     bearerAuth:
       type: http
