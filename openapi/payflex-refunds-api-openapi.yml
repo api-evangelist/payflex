@@ -81,26 +81,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    RefundResponse:
+    ErrorResponse:
       type: object
       properties:
-        refundId:
+        errorCode:
           type: string
-          description: Payflex-issued refund identifier
-          example: ref_xyz456abc
-        orderId:
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
           type: string
-          description: The order that was refunded
-          example: ord_abc123xyz
-        amount:
-          type: number
-          format: float
-          description: Amount refunded
-          example: 99.99
-        status:
-          type: string
-          description: Refund status
-          example: Approved
+          description: Human-readable error description
+          example: Access token is missing or invalid
     RefundRequest:
       type: object
       required:
@@ -126,17 +117,6 @@ components:
           type: string
           description: Merchant's reference for this refund
           example: 'Order #12345-ab3cd4ef'
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
     RefundErrorResponse:
       type: object
       properties:
@@ -148,6 +128,26 @@ components:
           type: string
           description: Human-readable error description
           example: Refund amount exceeds the remaining refundable balance
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          description: Payflex-issued refund identifier
+          example: ref_xyz456abc
+        orderId:
+          type: string
+          description: The order that was refunded
+          example: ord_abc123xyz
+        amount:
+          type: number
+          format: float
+          description: Amount refunded
+          example: 99.99
+        status:
+          type: string
+          description: Refund status
+          example: Approved
   securitySchemes:
     bearerAuth:
       type: http
