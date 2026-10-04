@@ -44,17 +44,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
-          type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
     ConfigurationResponse:
       type: object
       properties:
@@ -68,6 +57,17 @@ components:
           format: float
           description: Maximum order amount eligible for Payflex BNPL
           example: 8000.0
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
   securitySchemes:
     bearerAuth:
       type: http
