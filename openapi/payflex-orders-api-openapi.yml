@@ -144,29 +144,117 @@ components:
           type: string
           description: Postal code
           example: '8001'
-    MerchantSystemInformation:
+    OrderStatus:
+      type: string
+      enum:
+      - Created
+      - Initiated
+      - Approved
+      - Declined
+      - Abandoned
+      - Cancelled
+      description: 'Current status of the Payflex order: - Created: Order created, consumer not yet started checkout - Initiated: Consumer has started the checkout process - Approved: Payment approved, funds will be settled - Declined: Payment declined - Abandoned: Consumer did not complete the checkout - Cancelled: Order was cancelled
+
+        '
+    OrderItem:
+      type: object
+      required:
+      - name
+      - quantity
+      - price
+      properties:
+        name:
+          type: string
+          description: Product name
+          example: Blue T-Shirt
+        sku:
+          type: string
+          description: Product SKU
+          example: SKU-001
+        quantity:
+          type: string
+          description: Quantity ordered (as string)
+          example: '2'
+        price:
+          type: string
+          description: Unit price (as string with two decimal places)
+          example: '99.99'
+    OrderStatusResponse:
       type: object
       properties:
-        plugin_version:
+        orderId:
           type: string
-          description: Integration plugin version
-          example: 2.7.0
-        php_version:
+          description: Payflex-issued order identifier
+          example: ord_abc123xyz
+        orderStatus:
+          $ref: '#/components/schemas/OrderStatus'
+        merchantReference:
           type: string
-          description: PHP version (for PHP-based integrations)
-          example: 8.1.0
-        ecommerce_platform:
+          description: Merchant's own order reference
+          example: '12345'
+        amount:
+          type: number
+          format: float
+          description: Order total amount
+          example: 299.99
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+    CreateOrderResponse:
+      type: object
+      properties:
+        orderId:
           type: string
-          description: E-commerce platform name and version
-          example: WooCommerce 8.0
-        total_plugin_modules:
+          description: Payflex-issued order identifier
+          example: ord_abc123xyz
+        token:
           type: string
-          description: Total number of installed modules/plugins
-          example: '25'
-        active_plugin_modules:
+          description: Order token for status tracking
+          example: tok_xyz789abc
+        redirectUrl:
           type: string
-          description: Number of active modules/plugins
-          example: '12'
+          format: uri
+          description: URL to redirect the consumer to complete the Payflex checkout
+          example: https://checkout.payflex.co.za/order/ord_abc123xyz
+        message:
+          type: string
+          description: Error or informational message (on failure)
+          example: ''
+    Consumer:
+      type: object
+      required:
+      - phoneNumber
+      - givenNames
+      - surname
+      - email
+      properties:
+        phoneNumber:
+          type: string
+          description: Consumer's phone number (including country code)
+          example: '+27821234567'
+        givenNames:
+          type: string
+          description: Consumer's first name(s)
+          example: Jane
+        surname:
+          type: string
+          description: Consumer's last name
+          example: Smith
+        email:
+          type: string
+          format: email
+          description: Consumer's email address
+          example: jane.smith@example.com
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: UNAUTHORIZED
+        message:
+          type: string
+          description: Human-readable error description
+          example: Access token is missing or invalid
     CreateOrderRequest:
       type: object
       required:
@@ -212,94 +300,29 @@ components:
           example: 0
         merchantSystemInformation:
           $ref: '#/components/schemas/MerchantSystemInformation'
-    Consumer:
-      type: object
-      required:
-      - phoneNumber
-      - givenNames
-      - surname
-      - email
-      properties:
-        phoneNumber:
-          type: string
-          description: Consumer's phone number (including country code)
-          example: '+27821234567'
-        givenNames:
-          type: string
-          description: Consumer's first name(s)
-          example: Jane
-        surname:
-          type: string
-          description: Consumer's last name
-          example: Smith
-        email:
-          type: string
-          format: email
-          description: Consumer's email address
-          example: jane.smith@example.com
-    ErrorResponse:
+    MerchantSystemInformation:
       type: object
       properties:
-        errorCode:
+        plugin_version:
           type: string
-          description: Machine-readable error code
-          example: UNAUTHORIZED
-        message:
+          description: Integration plugin version
+          example: 2.7.0
+        php_version:
           type: string
-          description: Human-readable error description
-          example: Access token is missing or invalid
-    CreateOrderResponse:
-      type: object
-      properties:
-        orderId:
+          description: PHP version (for PHP-based integrations)
+          example: 8.1.0
+        ecommerce_platform:
           type: string
-          description: Payflex-issued order identifier
-          example: ord_abc123xyz
-        token:
+          description: E-commerce platform name and version
+          example: WooCommerce 8.0
+        total_plugin_modules:
           type: string
-          description: Order token for status tracking
-          example: tok_xyz789abc
-        redirectUrl:
+          description: Total number of installed modules/plugins
+          example: '25'
+        active_plugin_modules:
           type: string
-          format: uri
-          description: URL to redirect the consumer to complete the Payflex checkout
-          example: https://checkout.payflex.co.za/order/ord_abc123xyz
-        message:
-          type: string
-          description: Error or informational message (on failure)
-          example: ''
-    OrderStatusResponse:
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Payflex-issued order identifier
-          example: ord_abc123xyz
-        orderStatus:
-          $ref: '#/components/schemas/OrderStatus'
-        merchantReference:
-          type: string
-          description: Merchant's own order reference
-          example: '12345'
-        amount:
-          type: number
-          format: float
-          description: Order total amount
-          example: 299.99
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-    OrderStatus:
-      type: string
-      enum:
-      - Created
-      - Initiated
-      - Approved
-      - Declined
-      - Abandoned
-      - Cancelled
-      description: 'Current status of the Payflex order: - Created: Order created, consumer not yet started checkout - Initiated: Consumer has started the checkout process - Approved: Payment approved, funds will be settled - Declined: Payment declined - Abandoned: Consumer did not complete the checkout - Cancelled: Order was cancelled
-
-        '
+          description: Number of active modules/plugins
+          example: '12'
     MerchantRedirects:
       type: object
       required:
@@ -316,29 +339,6 @@ components:
           format: uri
           description: URL to redirect the consumer after a cancelled payment
           example: https://example.com/checkout/cancel?status=cancelled
-    OrderItem:
-      type: object
-      required:
-      - name
-      - quantity
-      - price
-      properties:
-        name:
-          type: string
-          description: Product name
-          example: Blue T-Shirt
-        sku:
-          type: string
-          description: Product SKU
-          example: SKU-001
-        quantity:
-          type: string
-          description: Quantity ordered (as string)
-          example: '2'
-        price:
-          type: string
-          description: Unit price (as string with two decimal places)
-          example: '99.99'
   securitySchemes:
     bearerAuth:
       type: http
