@@ -64,58 +64,158 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Payflex is a South African Buy Now Pay Later (BNPL) platform that enables
-merchants to offer interest-free installment payment options at checkout.
-Consumers can split purchases into up to four payments over six weeks, with the
-first 25% paid upfront. Payflex settles the full order amount to merchants
-upfront (less commission) and assumes all credit and fraud risk.
+Payflex is a South African Buy Now Pay Later (BNPL) platform that enables merchants to offer interest-free installment payment options to consumers. Shoppers can split purchases into up to four interest-free payments over six weeks, with the first payment made upfront. Payflex pays merchants the full purchase amount upfront (less a commission) and assumes all credit and fraud risk. The REST API supports hosted and embedded checkout flows, order lifecycle management, refunds, and merchant configuration retrieval.
 
-## API
+**Areas:** Buy Now Pay Later · Payments · Installments · South Africa · Fintech · E-Commerce
 
-The Payflex Merchant API is a REST API secured with OAuth2 Client Credentials.
-It supports both hosted (redirect) and embedded (iFrame) checkout flows and
-covers the full order lifecycle.
+## Payflex on APIs.io
 
-**Production base URL:** `https://api.payflex.co.za`  
-**Sandbox base URL:** `https://api.uat.payflex.co.za`  
-**Authentication:** `POST https://auth.payflex.co.za/auth/merchant`
+Everything profiled for Payflex is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/payflex/](https://apis.io/providers/payflex/)** — or go straight to one of the APIs or properties below.
 
-### Key Endpoints
+### APIs (4)
 
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/order/productSelect` | Create an order and initiate checkout |
-| GET | `/order/{orderId}` | Retrieve order status and details |
-| POST | `/order/{orderId}/refund` | Issue a full or partial refund |
-| GET | `/configuration` | Retrieve merchant payment limits |
+- [Payflex Authentication API](https://apis.io/apis/payflex/payflex-authentication-api/) — OAuth2 client credentials token endpoint
+- [Payflex Configuration API](https://apis.io/apis/payflex/payflex-configuration-api/) — Retrieve merchant payment limits and settings
+- [Payflex Orders API](https://apis.io/apis/payflex/payflex-orders-api/) — Create and manage BNPL payment orders
+- [Payflex Refunds API](https://apis.io/apis/payflex/payflex-refunds-api/) — Initiate full or partial refunds on completed orders
 
-### Authentication
+### Published properties
 
-Payflex uses the OAuth2 Client Credentials flow. Submit `client_id`,
-`client_secret`, `audience`, and `grant_type=client_credentials` to the
-auth endpoint to receive a bearer token. Credentials are issued by the Payflex
-merchant team during onboarding.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Platform Integrations
+#### Agentic access (1)
 
-Payflex provides official plugins and modules for:
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [WooCommerce](https://github.com/PayFlexSA/payflex-woocommerce-plugin)
-- [Magento 2.4](https://github.com/PayFlexSA/payflex-magento-2-4-module)
-- [OpenCart 3](https://github.com/PayFlexSA/payflex-opencart-3-extension)
-- [OpenCart 4](https://github.com/PayFlexSA/payflex-opencart-4-extension)
-- [PrestaShop 8](https://github.com/PayFlexSA/payflex-prestashop-8-module)
+- [Payflex Agentic Access](https://apis.io/agentic-access/payflex/payflex-agentic-access/)
 
-## Links
+#### JSON Schema (5)
 
-- Website: https://payflex.co.za/
-- Developer Docs: https://docs.payflex.co.za/
-- Merchant Portal: https://merchant.payflex.co.za/login
-- Merchant Hub: https://payflex.co.za/merchant/
-- Support: https://payflex.co.za/support/
-- GitHub: https://github.com/PayFlexSA
+The data models the API reads and writes.
 
-## APIs.json
+- [Configuration Response](https://apis.io/schemas/payflex/configuration-response/)
+- [Create Order Request](https://apis.io/schemas/payflex/create-order-request/)
+- [Create Order Response](https://apis.io/schemas/payflex/create-order-response/)
+- [Order Status Response](https://apis.io/schemas/payflex/order-status-response/)
+- [Refund Request](https://apis.io/schemas/payflex/refund-request/)
 
-This repository is an [APIs.json 0.19](https://apisjson.org/) profile for
-Payflex, maintained by [API Evangelist](https://apievangelist.com).
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [context Context](https://apis.io/jsonld/payflex/context/)
+
+#### Examples (7)
+
+Example requests and responses.
+
+- [Configuration Response](https://apis.io/examples/payflex/configuration-response/)
+- [Create Order Request](https://apis.io/examples/payflex/create-order-request/)
+- [Create Order Response](https://apis.io/examples/payflex/create-order-response/)
+- [Order Status Response](https://apis.io/examples/payflex/order-status-response/)
+- [Refund Request](https://apis.io/examples/payflex/refund-request/)
+- [Token Request](https://apis.io/examples/payflex/token-request/)
+- [Token Response](https://apis.io/examples/payflex/token-response/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Payflex Merchant Authentication API](https://apis.io/collections/payflex/open-payflex-authentication-api/)
+- [Payflex Merchant Authentication Configuration API](https://apis.io/collections/payflex/open-payflex-configuration-api/)
+- [Payflex Merchant Authentication Orders API](https://apis.io/collections/payflex/open-payflex-orders-api/)
+- [Payflex Merchant Authentication Refunds API](https://apis.io/collections/payflex/open-payflex-refunds-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Payflex — jsonschema rules](https://apis.io/rules/payflex/payflex-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Payflex Authentication](https://apis.io/security/payflex/payflex-authentication/)
+- [Payflex Domain Security](https://apis.io/security/payflex/payflex-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/payflex/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/payflex/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/payflex/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://payflex.co.za/)
+- [Support](https://payflex.co.za/support/)
+- [Blog](https://payflex.co.za/merchant-hub/)
+- [Terms of service](https://payflex.co.za/terms-conditions/)
+- [Privacy policy](https://payflex.co.za/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 33.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 61.2 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
+
+**Agent readiness 32.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.3** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/payflex/](https://apis.io/providers/payflex/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Payflex: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/payflex/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
